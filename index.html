@@ -20,10 +20,6 @@
             font-weight: bold;
             color: red;
         }
-
-        #practiceDesc {
-            margin-bottom: 15px;
-        }
     </style>
 </head>
 
@@ -60,8 +56,7 @@
 
     <h2>Practice Session</h2>
 
-    <!-- DESCRIPTION -->
-    <div id="practiceDesc">
+    <p>
         <b>About the Questions:</b><br><br>
         These questions are based on basic mathematical calculations:<br>
         • Addition<br>
@@ -74,9 +69,8 @@
         • Mental calculation 🧠<br><br>
 
         <b>Goal:</b> Improve your performance in the next round.
-    </div>
+    </p>
 
-    <!-- TIMER -->
     <p>⏱ Time Remaining:</p>
     <p id="practiceTimer">02:00</p>
 </div>
@@ -108,7 +102,7 @@
 let beforeStart, afterStart;
 let beforeTime = 0, afterTime = 0;
 
-// PRACTICE TIMER
+// TIMER
 let practiceTime = 120;
 let practiceInterval;
 
@@ -132,14 +126,14 @@ function submitBefore() {
 
     document.getElementById("beforeQ").style.display = "none";
 
-    // ✅ SHOW PRACTICE SECTION
+    // SHOW PRACTICE SECTION
     document.getElementById("practiceBox").style.display = "block";
 
-    // ✅ START TIMER IMMEDIATELY (runs with description)
+    // START TIMER IMMEDIATELY (no delay)
     startPracticeTimer();
 }
 
-// PRACTICE TIMER FUNCTION
+// TIMER FUNCTION
 function startPracticeTimer() {
 
     practiceTime = 120;
