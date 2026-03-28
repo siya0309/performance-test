@@ -140,8 +140,9 @@ function startAfter() {
 function sendData() {
     let name = document.getElementById("name").value;
 
-    fetch("https://script.google.com/macros/s/AKfycbwP-0PCCKH2ihjE5zKGyG4fyPznu_C2A7U4gRiwWhmAuQY-khVZKozYUUGlTsFlGj0kaQ/exec", {
+    fetch("https://script.google.com/macros/s/AKfycbyd166k8gSRGjAAP1ii5kr9LPaSvtL0GxTA7HcFWvv8j3cLwx9EuE5fwCR9HEXyH0s/exec", {
         method: "POST",
+        mode: "no-cors",   
         body: JSON.stringify({
             name: name,
             beforeTime: beforeTime,
@@ -150,10 +151,9 @@ function sendData() {
         headers: {
             "Content-Type": "application/json"
         }
-    })
-    .then(res => res.text())
-    .then(data => console.log("Success:", data))
-    .catch(err => console.error("Error:", err));
+    });
+
+    alert("Data submitted!");
 }
 
 function submitAfter() {
