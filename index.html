@@ -16,14 +16,13 @@
         }
 
         #practiceTimer {
-            font-size: 26px;
+            font-size: 28px;
             font-weight: bold;
             color: red;
         }
 
         #practiceDesc {
             margin-bottom: 15px;
-            font-size: 16px;
         }
     </style>
 </head>
@@ -32,7 +31,6 @@
 
 <h1>Task Performance Test</h1>
 
-<!-- NAME -->
 <h3>Enter Name:</h3>
 <input type="text" id="name" placeholder="Enter your name">
 
@@ -62,23 +60,23 @@
 
     <h2>Practice Session</h2>
 
-    <!-- ✅ DESCRIPTION HERE -->
+    <!-- DESCRIPTION -->
     <div id="practiceDesc">
         <b>About the Questions:</b><br><br>
-        You will practice basic mathematical calculations including:
-        <br>
+        These questions are based on basic mathematical calculations:<br>
         • Addition<br>
         • Subtraction<br>
         • Multiplication<br><br>
 
         <b>Focus on:</b><br>
-        • Solving quickly<br>
-        • Improving accuracy<br>
-        • Mental calculation (avoid counting)<br><br>
+        • Speed ⏱<br>
+        • Accuracy ✔<br>
+        • Mental calculation 🧠<br><br>
 
-        <b>Goal:</b> Perform better in the next round.
+        <b>Goal:</b> Improve your performance in the next round.
     </div>
 
+    <!-- TIMER -->
     <p>⏱ Time Remaining:</p>
     <p id="practiceTimer">02:00</p>
 </div>
@@ -125,7 +123,7 @@ function startBefore() {
     document.getElementById("beforeQ").style.display = "block";
 }
 
-// SUBMIT BEFORE → PRACTICE
+// SUBMIT BEFORE → SHOW PRACTICE + START TIMER
 function submitBefore() {
     beforeTime = (new Date().getTime() - beforeStart) / 1000;
 
@@ -134,12 +132,14 @@ function submitBefore() {
 
     document.getElementById("beforeQ").style.display = "none";
 
+    // ✅ SHOW PRACTICE SECTION
     document.getElementById("practiceBox").style.display = "block";
 
+    // ✅ START TIMER IMMEDIATELY (runs with description)
     startPracticeTimer();
 }
 
-// PRACTICE TIMER
+// PRACTICE TIMER FUNCTION
 function startPracticeTimer() {
 
     practiceTime = 120;
