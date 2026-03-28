@@ -6,7 +6,22 @@
         body { font-family: Arial; margin: 30px; }
         .section { margin-bottom: 30px; }
         button { padding: 8px 15px; margin-top: 10px; }
-        #practiceBox { display:none; font-size: 20px; color: blue; }
+
+        #practiceBox {
+            display:none;
+            font-size: 18px;
+            color: black;
+            border: 2px solid #007BFF;
+            padding: 15px;
+            border-radius: 10px;
+            background-color: #f0f8ff;
+        }
+
+        #practiceTimer {
+            font-size: 26px;
+            font-weight: bold;
+            color: red;
+        }
     </style>
 </head>
 
@@ -39,9 +54,29 @@
     <p id="beforeTime"></p>
 </div>
 
-<!-- PRACTICE TIMER -->
+<!-- PRACTICE SECTION -->
 <div id="practiceBox">
-    <h2>Practice Time (2 minutes)</h2>
+    <h2>Practice Session</h2>
+
+    <p>
+        📘 <b>About the Questions:</b><br><br>
+
+        The questions in this test are based on <b>basic arithmetic operations</b>:
+        <br><br>
+        • Addition (e.g., 5 + 3)<br>
+        • Subtraction (e.g., 10 - 4)<br>
+        • Multiplication (e.g., 6 × 2)<br><br>
+
+        🧠 <b>What to Focus On:</b><br>
+        • Solve quickly without counting on fingers<br>
+        • Improve mental calculation speed<br>
+        • Avoid calculation mistakes<br><br>
+
+        🎯 <b>Your Goal:</b><br>
+        Try to answer faster and more accurately in the next round.
+    </p>
+
+    <p>⏱ Time Remaining:</p>
     <p id="practiceTimer">02:00</p>
 </div>
 
@@ -72,7 +107,7 @@
 let beforeStart, afterStart;
 let beforeTime = 0, afterTime = 0;
 
-// PRACTICE TIMER VARIABLES
+// PRACTICE TIMER
 let practiceTime = 120;
 let practiceInterval;
 
@@ -87,24 +122,25 @@ function startBefore() {
     document.getElementById("beforeQ").style.display = "block";
 }
 
-// SUBMIT BEFORE → START PRACTICE
+// SUBMIT BEFORE → PRACTICE
 function submitBefore() {
     beforeTime = (new Date().getTime() - beforeStart) / 1000;
 
     document.getElementById("beforeTime").innerHTML =
         "Time: " + beforeTime + " seconds";
 
-    // Hide questions
     document.getElementById("beforeQ").style.display = "none";
 
-    // Show practice timer
     document.getElementById("practiceBox").style.display = "block";
 
     startPracticeTimer();
 }
 
-// PRACTICE TIMER FUNCTION
+// PRACTICE TIMER
 function startPracticeTimer() {
+
+    practiceTime = 120;
+
     practiceInterval = setInterval(() => {
 
         let minutes = Math.floor(practiceTime / 60);
@@ -118,13 +154,11 @@ function startPracticeTimer() {
         if (practiceTime < 0) {
             clearInterval(practiceInterval);
 
-            // Hide practice
             document.getElementById("practiceBox").style.display = "none";
 
-            // Enable After Practice
             document.getElementById("afterStartBtn").disabled = false;
 
-            alert("Practice time over! Now start After Practice.");
+            alert("Practice complete! Now start After Practice.");
         }
 
     }, 1000);
@@ -137,25 +171,6 @@ function startAfter() {
 }
 
 // SUBMIT AFTER
-function sendData() {
-    let name = document.getElementById("name").value;
-
-    fetch("https://script.google.com/macros/s/AKfycbyd166k8gSRGjAAP1ii5kr9LPaSvtL0GxTA7HcFWvv8j3cLwx9EuE5fwCR9HEXyH0s/exec", {
-        method: "POST",
-        mode: "no-cors",   
-        body: JSON.stringify({
-            name: name,
-            beforeTime: beforeTime,
-            afterTime: afterTime
-        }),
-        headers: {
-            "Content-Type": "application/json"
-        }
-    });
-
-    alert("Data submitted!");
-}
-
 function submitAfter() {
     afterTime = (new Date().getTime() - afterStart) / 1000;
 
@@ -163,10 +178,9 @@ function submitAfter() {
         "Time: " + afterTime + " seconds";
 
     showResult();
-    sendData(); 
 }
 
-// SHOW RESULT
+// RESULT
 function showResult() {
     if (afterTime < beforeTime) {
         document.getElementById("result").innerHTML =
@@ -176,7 +190,6 @@ function showResult() {
             "❌ No Improvement";
     }
 }
-
 </script>
 
 </body>
