@@ -9,18 +9,8 @@
 
         #practiceBox {
             display:none;
-            font-size: 18px;
-            color: black;
-            border: 2px solid #007BFF;
-            padding: 15px;
-            border-radius: 10px;
-            background-color: #f0f8ff;
-        }
-
-        #practiceTimer {
-            font-size: 26px;
-            font-weight: bold;
-            color: red;
+            font-size: 20px;
+            color: blue;
         }
     </style>
 </head>
@@ -54,29 +44,9 @@
     <p id="beforeTime"></p>
 </div>
 
-<!-- PRACTICE SECTION -->
+<!-- PRACTICE TIMER -->
 <div id="practiceBox">
-    <h2>Practice Session</h2>
-
-    <p>
-        📘 <b>About the Questions:</b><br><br>
-
-        The questions in this test are based on <b>basic arithmetic operations</b>:
-        <br><br>
-        • Addition (e.g., 5 + 3)<br>
-        • Subtraction (e.g., 10 - 4)<br>
-        • Multiplication (e.g., 6 × 2)<br><br>
-
-        🧠 <b>What to Focus On:</b><br>
-        • Solve quickly without counting on fingers<br>
-        • Improve mental calculation speed<br>
-        • Avoid calculation mistakes<br><br>
-
-        🎯 <b>Your Goal:</b><br>
-        Try to answer faster and more accurately in the next round.
-    </p>
-
-    <p>⏱ Time Remaining:</p>
+    <h2>Practice Time (2 minutes)</h2>
     <p id="practiceTimer">02:00</p>
 </div>
 
@@ -131,6 +101,19 @@ function submitBefore() {
 
     document.getElementById("beforeQ").style.display = "none";
 
+    // 🔥 POP-UP DESCRIPTION
+    alert(
+        "Practice Session Instructions:\n\n" +
+        "You will be practicing basic mathematical calculations.\n\n" +
+        "The questions include:\n" +
+        "• Addition\n" +
+        "• Subtraction\n" +
+        "• Multiplication\n\n" +
+        "Focus on solving quickly and accurately.\n" +
+        "Try to improve your speed for the next round!"
+    );
+
+    // Show timer
     document.getElementById("practiceBox").style.display = "block";
 
     startPracticeTimer();
@@ -138,7 +121,6 @@ function submitBefore() {
 
 // PRACTICE TIMER
 function startPracticeTimer() {
-
     practiceTime = 120;
 
     practiceInterval = setInterval(() => {
@@ -158,7 +140,7 @@ function startPracticeTimer() {
 
             document.getElementById("afterStartBtn").disabled = false;
 
-            alert("Practice complete! Now start After Practice.");
+            alert("Practice time over! Now start After Practice.");
         }
 
     }, 1000);
