@@ -44,14 +44,16 @@
     <button onclick="startBefore()">Start</button>
 
     <div id="beforeQ" style="display:none;">
-        <p>1. 5 + 3 = ?</p>
-        <input type="text" id="b1">
-
-        <p>2. 10 - 4 = ?</p>
-        <input type="text" id="b2">
-
-        <p>3. 6 × 2 = ?</p>
-        <input type="text" id="b3">
+        <p>1. 13 × 1 = ?</p><input type="text" id="b1">
+        <p>2. 13 × 2 = ?</p><input type="text" id="b2">
+        <p>3. 13 × 3 = ?</p><input type="text" id="b3">
+        <p>4. 13 × 4 = ?</p><input type="text" id="b4">
+        <p>5. 13 × 5 = ?</p><input type="text" id="b5">
+        <p>6. 13 × 6 = ?</p><input type="text" id="b6">
+        <p>7. 13 × 7 = ?</p><input type="text" id="b7">
+        <p>8. 13 × 8 = ?</p><input type="text" id="b8">
+        <p>9. 13 × 9 = ?</p><input type="text" id="b9">
+        <p>10. 13 × 10 = ?</p><input type="text" id="b10">
 
         <button onclick="submitBefore()">Submit</button>
     </div>
@@ -65,18 +67,22 @@
     <h2>Practice Session</h2>
 
     <p>
-        <b>About the Questions:</b><br><br>
-        These questions are based on basic mathematical calculations:<br>
-        • Addition<br>
-        • Subtraction<br>
-        • Multiplication<br><br>
+        <b>Multiplication Table of 13:</b><br><br>
+        13 × 1 = 13<br>
+        13 × 2 = 26<br>
+        13 × 3 = 39<br>
+        13 × 4 = 52<br>
+        13 × 5 = 65<br>
+        13 × 6 = 78<br>
+        13 × 7 = 91<br>
+        13 × 8 = 104<br>
+        13 × 9 = 117<br>
+        13 × 10 = 130<br><br>
 
         <b>Focus on:</b><br>
+        • Memorization<br>
         • Speed ⏱<br>
-        • Accuracy ✔<br>
-        • Mental calculation 🧠<br><br>
-
-        <b>Goal:</b> Improve your performance in the next round.
+        • Accuracy ✔
     </p>
 
     <p>⏱ Time Remaining:</p>
@@ -89,14 +95,16 @@
     <button id="afterStartBtn" onclick="startAfter()" disabled>Start</button>
 
     <div id="afterQ" style="display:none;">
-        <p>1. 5 + 3 = ?</p>
-        <input type="text" id="a1">
-
-        <p>2. 10 - 4 = ?</p>
-        <input type="text" id="a2">
-
-        <p>3. 6 × 2 = ?</p>
-        <input type="text" id="a3">
+        <p>1. 13 × 1 = ?</p><input type="text" id="a1">
+        <p>2. 13 × 2 = ?</p><input type="text" id="a2">
+        <p>3. 13 × 3 = ?</p><input type="text" id="a3">
+        <p>4. 13 × 4 = ?</p><input type="text" id="a4">
+        <p>5. 13 × 5 = ?</p><input type="text" id="a5">
+        <p>6. 13 × 6 = ?</p><input type="text" id="a6">
+        <p>7. 13 × 7 = ?</p><input type="text" id="a7">
+        <p>8. 13 × 8 = ?</p><input type="text" id="a8">
+        <p>9. 13 × 9 = ?</p><input type="text" id="a9">
+        <p>10. 13 × 10 = ?</p><input type="text" id="a10">
 
         <button onclick="submitAfter()">Submit</button>
     </div>
@@ -110,11 +118,9 @@
 let beforeStart, afterStart;
 let beforeTime = 0, afterTime = 0;
 
-// TIMER
 let practiceTime = 120;
 let practiceInterval;
 
-// START BEFORE
 function startBefore() {
     let name = document.getElementById("name").value;
 
@@ -126,13 +132,11 @@ function startBefore() {
     beforeStart = new Date().getTime();
     document.getElementById("beforeQ").style.display = "block";
 
-    // ✅ Auto-focus first input
     setTimeout(() => {
         document.getElementById("b1").focus();
     }, 100);
 }
 
-// SUBMIT BEFORE
 function submitBefore() {
     beforeTime = (new Date().getTime() - beforeStart) / 1000;
 
@@ -140,19 +144,15 @@ function submitBefore() {
         "Time: " + beforeTime + " seconds";
 
     document.getElementById("beforeQ").style.display = "none";
-
     document.getElementById("practiceBox").style.display = "block";
 
     startPracticeTimer();
 }
 
-// TIMER FUNCTION
 function startPracticeTimer() {
-
     practiceTime = 120;
 
     practiceInterval = setInterval(() => {
-
         let minutes = Math.floor(practiceTime / 60);
         let seconds = practiceTime % 60;
 
@@ -163,29 +163,23 @@ function startPracticeTimer() {
 
         if (practiceTime < 0) {
             clearInterval(practiceInterval);
-
             document.getElementById("practiceBox").style.display = "none";
-
             document.getElementById("afterStartBtn").disabled = false;
 
             alert("Practice complete! Now start After Practice.");
         }
-
     }, 1000);
 }
 
-// START AFTER
 function startAfter() {
     afterStart = new Date().getTime();
     document.getElementById("afterQ").style.display = "block";
 
-    // ✅ Auto-focus first after input
     setTimeout(() => {
         document.getElementById("a1").focus();
     }, 100);
 }
 
-// SUBMIT AFTER
 function submitAfter() {
     afterTime = (new Date().getTime() - afterStart) / 1000;
 
@@ -195,7 +189,6 @@ function submitAfter() {
     showResult();
 }
 
-// RESULT
 function showResult() {
     if (afterTime < beforeTime) {
         document.getElementById("result").innerHTML =
