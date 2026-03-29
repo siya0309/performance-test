@@ -2,117 +2,157 @@
 <html>
 <head>
     <title>Performance Test</title>
+
     <style>
-        body { font-family: Arial; margin: 30px; }
-        .section { margin-bottom: 30px; }
-        button { padding: 8px 15px; margin-top: 10px; }
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(to right, #e6ccff, #f3e6ff);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background: white;
+            padding: 30px 40px;
+            border-radius: 20px;
+            width: 450px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            text-align: center;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        h1 { color: #6a0dad; }
+        h2 { color: #7b2cbf; }
 
         input {
-            padding: 6px;
-            margin: 5px 0;
+            padding: 10px;
+            margin: 6px auto;
             display: block;
-            width: 200px;
+            width: 80%;
+            border-radius: 8px;
+            border: 1px solid #ccc;
         }
+
+        button {
+            padding: 10px 20px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 8px;
+            background: #9d4edd;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover { background: #7b2cbf; }
+        button:disabled { background: grey; }
 
         #practiceBox {
             display:none;
-            border: 2px solid #007BFF;
-            padding: 15px;
-            border-radius: 10px;
-            background-color: #f0f8ff;
             margin-top: 20px;
+            padding: 15px;
+            border-radius: 12px;
+            background: #f5ebff;
         }
 
         #practiceTimer {
             font-size: 28px;
             font-weight: bold;
-            color: red;
+            color: #5a189a;
+        }
+
+        .section { margin-top: 20px; }
+
+        #result {
+            font-size: 20px;
+            margin-top: 15px;
+            color: #6a0dad;
         }
     </style>
 </head>
 
 <body>
 
+<div class="container">
+
 <h1>Task Performance Test</h1>
 
 <h3>Enter Name:</h3>
-<input type="text" id="name" placeholder="Enter your name">
+<input type="text" id="name">
 
-<!-- BEFORE PRACTICE -->
+<!-- BEFORE -->
 <div class="section">
-    <h2>Before Practice</h2>
-    <button onclick="startBefore()">Start</button>
+<h2>Before Practice</h2>
+<button onclick="startBefore()">Start</button>
 
-    <div id="beforeQ" style="display:none;">
-        <p>1. 13 × 1 = ?</p><input type="text" id="b1">
-        <p>2. 13 × 2 = ?</p><input type="text" id="b2">
-        <p>3. 13 × 3 = ?</p><input type="text" id="b3">
-        <p>4. 13 × 4 = ?</p><input type="text" id="b4">
-        <p>5. 13 × 5 = ?</p><input type="text" id="b5">
-        <p>6. 13 × 6 = ?</p><input type="text" id="b6">
-        <p>7. 13 × 7 = ?</p><input type="text" id="b7">
-        <p>8. 13 × 8 = ?</p><input type="text" id="b8">
-        <p>9. 13 × 9 = ?</p><input type="text" id="b9">
-        <p>10. 13 × 10 = ?</p><input type="text" id="b10">
+<div id="beforeQ" style="display:none;">
+    <p>13 × 1 = ?</p><input id="b1">
+    <p>13 × 2 = ?</p><input id="b2">
+    <p>13 × 3 = ?</p><input id="b3">
+    <p>13 × 4 = ?</p><input id="b4">
+    <p>13 × 5 = ?</p><input id="b5">
+    <p>13 × 6 = ?</p><input id="b6">
+    <p>13 × 7 = ?</p><input id="b7">
+    <p>13 × 8 = ?</p><input id="b8">
+    <p>13 × 9 = ?</p><input id="b9">
+    <p>13 × 10 = ?</p><input id="b10">
 
-        <button onclick="submitBefore()">Submit</button>
-    </div>
-
-    <p id="beforeTime"></p>
+    <button onclick="submitBefore()">Submit</button>
 </div>
 
-<!-- PRACTICE SECTION -->
+<p id="beforeTime"></p>
+</div>
+
+<!-- PRACTICE -->
 <div id="practiceBox">
+<h2>Practice Session</h2>
 
-    <h2>Practice Session</h2>
+<p>
+13 × 1 = 13<br>
+13 × 2 = 26<br>
+13 × 3 = 39<br>
+13 × 4 = 52<br>
+13 × 5 = 65<br>
+13 × 6 = 78<br>
+13 × 7 = 91<br>
+13 × 8 = 104<br>
+13 × 9 = 117<br>
+13 × 10 = 130
+</p>
 
-    <p>
-        <b>Multiplication Table of 13:</b><br><br>
-        13 × 1 = 13<br>
-        13 × 2 = 26<br>
-        13 × 3 = 39<br>
-        13 × 4 = 52<br>
-        13 × 5 = 65<br>
-        13 × 6 = 78<br>
-        13 × 7 = 91<br>
-        13 × 8 = 104<br>
-        13 × 9 = 117<br>
-        13 × 10 = 130<br><br>
-
-        <b>Focus on:</b><br>
-        • Memorization<br>
-        • Speed ⏱<br>
-        • Accuracy ✔
-    </p>
-
-    <p>⏱ Time Remaining:</p>
-    <p id="practiceTimer">02:00</p>
+<p>⏱ Time Remaining:</p>
+<p id="practiceTimer">02:00</p>
 </div>
 
-<!-- AFTER PRACTICE -->
+<!-- AFTER -->
 <div class="section">
-    <h2>After Practice</h2>
-    <button id="afterStartBtn" onclick="startAfter()" disabled>Start</button>
+<h2>After Practice</h2>
+<button id="afterStartBtn" onclick="startAfter()" disabled>Start</button>
 
-    <div id="afterQ" style="display:none;">
-        <p>1. 13 × 1 = ?</p><input type="text" id="a1">
-        <p>2. 13 × 2 = ?</p><input type="text" id="a2">
-        <p>3. 13 × 3 = ?</p><input type="text" id="a3">
-        <p>4. 13 × 4 = ?</p><input type="text" id="a4">
-        <p>5. 13 × 5 = ?</p><input type="text" id="a5">
-        <p>6. 13 × 6 = ?</p><input type="text" id="a6">
-        <p>7. 13 × 7 = ?</p><input type="text" id="a7">
-        <p>8. 13 × 8 = ?</p><input type="text" id="a8">
-        <p>9. 13 × 9 = ?</p><input type="text" id="a9">
-        <p>10. 13 × 10 = ?</p><input type="text" id="a10">
+<div id="afterQ" style="display:none;">
+    <p>13 × 1 = ?</p><input id="a1">
+    <p>13 × 2 = ?</p><input id="a2">
+    <p>13 × 3 = ?</p><input id="a3">
+    <p>13 × 4 = ?</p><input id="a4">
+    <p>13 × 5 = ?</p><input id="a5">
+    <p>13 × 6 = ?</p><input id="a6">
+    <p>13 × 7 = ?</p><input id="a7">
+    <p>13 × 8 = ?</p><input id="a8">
+    <p>13 × 9 = ?</p><input id="a9">
+    <p>13 × 10 = ?</p><input id="a10">
 
-        <button onclick="submitAfter()">Submit</button>
-    </div>
+    <button onclick="submitAfter()">Submit</button>
+</div>
 
-    <p id="afterTime"></p>
+<p id="afterTime"></p>
 </div>
 
 <h2 id="result"></h2>
+
+</div>
 
 <script>
 let beforeStart, afterStart;
@@ -122,26 +162,18 @@ let practiceTime = 120;
 let practiceInterval;
 
 function startBefore() {
-    let name = document.getElementById("name").value;
-
-    if (name === "") {
-        alert("Enter your name first!");
+    if (document.getElementById("name").value === "") {
+        alert("Enter your name!");
         return;
     }
 
-    beforeStart = new Date().getTime();
+    beforeStart = Date.now();
     document.getElementById("beforeQ").style.display = "block";
-
-    setTimeout(() => {
-        document.getElementById("b1").focus();
-    }, 100);
 }
 
 function submitBefore() {
-    beforeTime = (new Date().getTime() - beforeStart) / 1000;
-
-    document.getElementById("beforeTime").innerHTML =
-        "Time: " + beforeTime + " seconds";
+    beforeTime = (Date.now() - beforeStart) / 1000;
+    document.getElementById("beforeTime").innerHTML = "Time: " + beforeTime + " sec";
 
     document.getElementById("beforeQ").style.display = "none";
     document.getElementById("practiceBox").style.display = "block";
@@ -153,11 +185,11 @@ function startPracticeTimer() {
     practiceTime = 120;
 
     practiceInterval = setInterval(() => {
-        let minutes = Math.floor(practiceTime / 60);
-        let seconds = practiceTime % 60;
+        let m = Math.floor(practiceTime / 60);
+        let s = practiceTime % 60;
 
         document.getElementById("practiceTimer").innerText =
-            minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
+            m + ":" + (s < 10 ? "0" : "") + s;
 
         practiceTime--;
 
@@ -165,38 +197,22 @@ function startPracticeTimer() {
             clearInterval(practiceInterval);
             document.getElementById("practiceBox").style.display = "none";
             document.getElementById("afterStartBtn").disabled = false;
-
-            alert("Practice complete! Now start After Practice.");
+            alert("Start After Practice!");
         }
     }, 1000);
 }
 
 function startAfter() {
-    afterStart = new Date().getTime();
+    afterStart = Date.now();
     document.getElementById("afterQ").style.display = "block";
-
-    setTimeout(() => {
-        document.getElementById("a1").focus();
-    }, 100);
 }
 
 function submitAfter() {
-    afterTime = (new Date().getTime() - afterStart) / 1000;
+    afterTime = (Date.now() - afterStart) / 1000;
+    document.getElementById("afterTime").innerHTML = "Time: " + afterTime + " sec";
 
-    document.getElementById("afterTime").innerHTML =
-        "Time: " + afterTime + " seconds";
-
-    showResult();
-}
-
-function showResult() {
-    if (afterTime < beforeTime) {
-        document.getElementById("result").innerHTML =
-            "✅ Performance Improved!";
-    } else {
-        document.getElementById("result").innerHTML =
-            "❌ No Improvement";
-    }
+    document.getElementById("result").innerHTML =
+        afterTime < beforeTime ? "✅ Improved!" : "❌ Try Again!";
 }
 </script>
 
