@@ -45,7 +45,7 @@ button:disabled { background: grey; }
 
 <div class="container">
 
-<h1>Quiz Test</h1>
+<h1>Economics Quiz Test</h1>
 <input type="text" id="name" placeholder="Enter Name">
 
 <!-- BEFORE -->
@@ -102,15 +102,15 @@ button:disabled { background: grey; }
 <h2>Concept Review</h2>
 
 <p style="text-align:left;">
-• <b>Tertiary sector</b> includes IT services.<br><br>
-• <b>Foreign exchange</b> = exchange of currencies.<br><br>
-• Higher <b>interest rates</b>=loans expensive.<br><br>
-• <b>Liquidity</b> = ease of converting assets into cash.<br><br>
-• <b>NPA</b> = loan not repaid for long time.<br><br>
-• <b>Depreciation</b> = fall in currency value.
+• Tertiary sector includes IT services.<br><br>
+• Foreign exchange = exchange of currencies.<br><br>
+• Higher interest rates → loans expensive.<br><br>
+• Liquidity = ease of converting assets into cash.<br><br>
+• NPA = loan not repaid for long time.<br><br>
+• Depreciation = fall in currency value.
 </p>
 
-<p>Time Remaining:</p>
+<p>⏱ Time Remaining:</p>
 <p id="timer">01:00</p>
 </div>
 
@@ -121,6 +121,7 @@ button:disabled { background: grey; }
 
 <div id="afterQ" style="display:none; text-align:left;">
 
+<!-- SAME QUESTIONS AGAIN -->
 <p>1. Which sector includes IT services?</p>
 <input type="radio" name="a1" value="Primary"> Primary<br>
 <input type="radio" name="a1" value="Secondary"> Secondary<br>
@@ -168,7 +169,11 @@ button:disabled { background: grey; }
 </div>
 
 <script>
+const scriptURL = "https://script.google.com/macros/s/AKfycbzpSH6Wtpf4s5NltrmC4aNN9lhwaJ9q6mOfLZZgXelSkSIsv-7DtVORi72B0kyK681b/exec";
+
 let beforeStart, afterStart;
+let beforeScore = 0, afterScore = 0;
+let beforeTimeValue = 0;
 
 const answers = [
 "Tertiary",
@@ -181,10 +186,8 @@ const answers = [
 
 function getScore(prefix) {
     let score = 0;
-
     for (let i = 1; i <= 6; i++) {
         let options = document.getElementsByName(prefix + i);
-
         for (let opt of options) {
             if (opt.checked && opt.value === answers[i-1]) {
                 score++;
@@ -204,11 +207,11 @@ function startBefore(){
 }
 
 function submitBefore(){
-    let time = (Date.now()-beforeStart)/1000;
-    let score = getScore("b");
+    beforeTimeValue = (Date.now()-beforeStart)/1000;
+    beforeScore = getScore("b");
 
     document.getElementById("beforeTime").innerHTML =
-        "Time: "+time+" sec | Score: "+score+"/6";
+        "Time: "+beforeTimeValue+" sec | Score: "+beforeScore+"/6";
 
     document.getElementById("beforeQ").style.display="none";
     document.getElementById("practiceBox").style.display="block";
@@ -218,7 +221,6 @@ function submitBefore(){
 
 function startTimer(){
     let t = 60;
-
     let interval=setInterval(()=>{
         document.getElementById("timer").innerText =
             Math.floor(t/60)+":"+(t%60<10?"0":"")+t%60;
@@ -237,16 +239,35 @@ function startAfter(){
 }
 
 function submitAfter(){
-    let time = (Date.now()-afterStart)/1000;
-    let score = getScore("a");
+    let afterTimeValue = (Date.now()-afterStart)/1000;
+    afterScore = getScore("a");
 
     document.getElementById("afterTime").innerHTML =
-        "Time: "+time+" sec | Score: "+score+"/6";
+        "Time: "+afterTimeValue+" sec | Score: "+afterScore+"/6";
 
     document.getElementById("afterQ").style.display="none";
 
     document.getElementById("result").innerHTML =
-        "Test Completed!";
+        "✅ Test Completed!";
+
+    sendData(afterTimeValue);
+}
+
+function sendData(afterTimeValue){
+    let data = {
+        name: document.getElementById("name").value,
+        beforeTime: beforeTimeValue,
+        beforeScore: beforeScore,
+        afterTime: afterTimeValue,
+        afterScore: afterScore
+    };
+
+    fetch(scriptURL, {
+        method: "POST",
+        body: JSON.stringify(data)
+    })
+    .then(res => console.log("Saved to Google Sheet"))
+    .catch(err => console.log("Error:", err));
 }
 </script>
 
