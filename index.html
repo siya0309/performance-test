@@ -1,150 +1,163 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Performance Test</title>
+<title>Economics Performance Test</title>
 
-    <style>
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            background: linear-gradient(to right, #e6ccff, #f3e6ff);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-        }
+<style>
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(to right, #e6ccff, #f3e6ff);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
 
-        .container {
-            background: white;
-            padding: 30px 40px;
-            border-radius: 20px;
-            width: 450px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-            text-align: center;
-            max-height: 90vh;
-            overflow-y: auto;
-        }
+.container {
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    width: 520px;
+    text-align: center;
+    max-height: 90vh;
+    overflow-y: auto;
+}
 
-        h1 { color: #6a0dad; }
-        h2 { color: #7b2cbf; }
+button {
+    padding: 10px;
+    margin-top: 10px;
+    background: #9d4edd;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
 
-        input {
-            padding: 10px;
-            margin: 6px auto;
-            display: block;
-            width: 80%;
-            border-radius: 8px;
-            border: 1px solid #ccc;
-        }
+button:hover { background: #7b2cbf; }
+button:disabled { background: grey; }
 
-        button {
-            padding: 10px 20px;
-            margin-top: 10px;
-            border: none;
-            border-radius: 8px;
-            background: #9d4edd;
-            color: white;
-            cursor: pointer;
-        }
-
-        button:hover { background: #7b2cbf; }
-        button:disabled { background: grey; }
-
-        #practiceBox {
-            display:none;
-            margin-top: 20px;
-            padding: 15px;
-            border-radius: 12px;
-            background: #f5ebff;
-        }
-
-        #practiceTimer {
-            font-size: 28px;
-            font-weight: bold;
-            color: #5a189a;
-        }
-
-        .section { margin-top: 20px; }
-
-        #result {
-            font-size: 20px;
-            margin-top: 15px;
-            color: #6a0dad;
-        }
-    </style>
+.section { margin-top: 20px; }
+</style>
 </head>
 
 <body>
 
 <div class="container">
 
-<h1>Task Performance Test</h1>
-
-<h3>Enter Name:</h3>
-<input type="text" id="name">
+<h1>Quiz Test</h1>
+<input type="text" id="name" placeholder="Enter Name">
 
 <!-- BEFORE -->
 <div class="section">
 <h2>Before Practice</h2>
 <button onclick="startBefore()">Start</button>
 
-<div id="beforeQ" style="display:none;">
-    <p>13 × 1 = ?</p><input id="b1">
-    <p>13 × 2 = ?</p><input id="b2">
-    <p>13 × 3 = ?</p><input id="b3">
-    <p>13 × 4 = ?</p><input id="b4">
-    <p>13 × 5 = ?</p><input id="b5">
-    <p>13 × 6 = ?</p><input id="b6">
-    <p>13 × 7 = ?</p><input id="b7">
-    <p>13 × 8 = ?</p><input id="b8">
-    <p>13 × 9 = ?</p><input id="b9">
-    <p>13 × 10 = ?</p><input id="b10">
+<div id="beforeQ" style="display:none; text-align:left;">
 
-    <button onclick="submitBefore()">Submit</button>
+<p>1. Which sector includes IT services?</p>
+<input type="radio" name="b1" value="Primary"> Primary<br>
+<input type="radio" name="b1" value="Secondary"> Secondary<br>
+<input type="radio" name="b1" value="Tertiary"> Tertiary<br>
+<input type="radio" name="b1" value="Agricultural"> Agricultural<br>
+
+<p>2. What is foreign exchange?</p>
+<input type="radio" name="b2" value="Local currency"> Local currency<br>
+<input type="radio" name="b2" value="Exchange of foreign currencies"> Exchange of foreign currencies<br>
+<input type="radio" name="b2" value="Bank deposit"> Bank deposit<br>
+<input type="radio" name="b2" value="Tax system"> Tax system<br>
+
+<p>3. What happens when interest rates increase?</p>
+<input type="radio" name="b3" value="Loans become cheaper"> Loans become cheaper<br>
+<input type="radio" name="b3" value="Loans become expensive"> Loans become expensive<br>
+<input type="radio" name="b3" value="No effect"> No effect<br>
+<input type="radio" name="b3" value="Inflation increases immediately"> Inflation increases immediately<br>
+
+<p>4. What is liquidity?</p>
+<input type="radio" name="b4" value="Profit of company"> Profit of company<br>
+<input type="radio" name="b4" value="Ease of converting assets into cash"> Ease of converting assets into cash<br>
+<input type="radio" name="b4" value="Bank loan rate"> Bank loan rate<br>
+<input type="radio" name="b4" value="Tax collection"> Tax collection<br>
+
+<p>5. What is a non-performing asset (NPA)?</p>
+<input type="radio" name="b5" value="Profitable loan"> Profitable loan<br>
+<input type="radio" name="b5" value="Loan not repaid for a long time"> Loan not repaid for a long time<br>
+<input type="radio" name="b5" value="Government bond"> Government bond<br>
+<input type="radio" name="b5" value="Bank deposit"> Bank deposit<br>
+
+<p>6. Depreciation of currency means:</p>
+<input type="radio" name="b6" value="Currency value increases"> Currency value increases<br>
+<input type="radio" name="b6" value="Currency value decreases"> Currency value decreases<br>
+<input type="radio" name="b6" value="No change"> No change<br>
+<input type="radio" name="b6" value="Inflation stops"> Inflation stops<br>
+
+<button onclick="submitBefore()">Submit</button>
 </div>
 
 <p id="beforeTime"></p>
 </div>
 
 <!-- PRACTICE -->
-<div id="practiceBox">
-<h2>Practice Session</h2>
+<div id="practiceBox" style="display:none;">
+<h2>Concept Review</h2>
 
-<p>
-13 × 1 = 13<br>
-13 × 2 = 26<br>
-13 × 3 = 39<br>
-13 × 4 = 52<br>
-13 × 5 = 65<br>
-13 × 6 = 78<br>
-13 × 7 = 91<br>
-13 × 8 = 104<br>
-13 × 9 = 117<br>
-13 × 10 = 130
+<p style="text-align:left;">
+• <b>Tertiary sector</b> includes IT services.<br><br>
+• <b>Foreign exchange</b> = exchange of currencies.<br><br>
+• Higher <b>interest rates</b>=loans expensive.<br><br>
+• <b>Liquidity</b> = ease of converting assets into cash.<br><br>
+• <b>NPA</b> = loan not repaid for long time.<br><br>
+• <b>Depreciation</b> = fall in currency value.
 </p>
 
-<p>⏱ Time Remaining:</p>
-<p id="practiceTimer">02:00</p>
+<p>Time Remaining:</p>
+<p id="timer">01:00</p>
 </div>
 
 <!-- AFTER -->
 <div class="section">
 <h2>After Practice</h2>
-<button id="afterStartBtn" onclick="startAfter()" disabled>Start</button>
+<button id="afterBtn" onclick="startAfter()" disabled>Start</button>
 
-<div id="afterQ" style="display:none;">
-    <p>13 × 1 = ?</p><input id="a1">
-    <p>13 × 2 = ?</p><input id="a2">
-    <p>13 × 3 = ?</p><input id="a3">
-    <p>13 × 4 = ?</p><input id="a4">
-    <p>13 × 5 = ?</p><input id="a5">
-    <p>13 × 6 = ?</p><input id="a6">
-    <p>13 × 7 = ?</p><input id="a7">
-    <p>13 × 8 = ?</p><input id="a8">
-    <p>13 × 9 = ?</p><input id="a9">
-    <p>13 × 10 = ?</p><input id="a10">
+<div id="afterQ" style="display:none; text-align:left;">
 
-    <button onclick="submitAfter()">Submit</button>
+<p>1. Which sector includes IT services?</p>
+<input type="radio" name="a1" value="Primary"> Primary<br>
+<input type="radio" name="a1" value="Secondary"> Secondary<br>
+<input type="radio" name="a1" value="Tertiary"> Tertiary<br>
+<input type="radio" name="a1" value="Agricultural"> Agricultural<br>
+
+<p>2. What is foreign exchange?</p>
+<input type="radio" name="a2" value="Local currency"> Local currency<br>
+<input type="radio" name="a2" value="Exchange of foreign currencies"> Exchange of foreign currencies<br>
+<input type="radio" name="a2" value="Bank deposit"> Bank deposit<br>
+<input type="radio" name="a2" value="Tax system"> Tax system<br>
+
+<p>3. What happens when interest rates increase?</p>
+<input type="radio" name="a3" value="Loans become cheaper"> Loans become cheaper<br>
+<input type="radio" name="a3" value="Loans become expensive"> Loans become expensive<br>
+<input type="radio" name="a3" value="No effect"> No effect<br>
+<input type="radio" name="a3" value="Inflation increases immediately"> Inflation increases immediately<br>
+
+<p>4. What is liquidity?</p>
+<input type="radio" name="a4" value="Profit of company"> Profit of company<br>
+<input type="radio" name="a4" value="Ease of converting assets into cash"> Ease of converting assets into cash<br>
+<input type="radio" name="a4" value="Bank loan rate"> Bank loan rate<br>
+<input type="radio" name="a4" value="Tax collection"> Tax collection<br>
+
+<p>5. What is a non-performing asset (NPA)?</p>
+<input type="radio" name="a5" value="Profitable loan"> Profitable loan<br>
+<input type="radio" name="a5" value="Loan not repaid for a long time"> Loan not repaid for a long time<br>
+<input type="radio" name="a5" value="Government bond"> Government bond<br>
+<input type="radio" name="a5" value="Bank deposit"> Bank deposit<br>
+
+<p>6. Depreciation of currency means:</p>
+<input type="radio" name="a6" value="Currency value increases"> Currency value increases<br>
+<input type="radio" name="a6" value="Currency value decreases"> Currency value decreases<br>
+<input type="radio" name="a6" value="No change"> No change<br>
+<input type="radio" name="a6" value="Inflation stops"> Inflation stops<br>
+
+<button onclick="submitAfter()">Submit</button>
 </div>
 
 <p id="afterTime"></p>
@@ -156,63 +169,84 @@
 
 <script>
 let beforeStart, afterStart;
-let beforeTime = 0, afterTime = 0;
 
-let practiceTime = 120;
-let practiceInterval;
+const answers = [
+"Tertiary",
+"Exchange of foreign currencies",
+"Loans become expensive",
+"Ease of converting assets into cash",
+"Loan not repaid for a long time",
+"Currency value decreases"
+];
 
-function startBefore() {
-    if (document.getElementById("name").value === "") {
-        alert("Enter your name!");
+function getScore(prefix) {
+    let score = 0;
+
+    for (let i = 1; i <= 6; i++) {
+        let options = document.getElementsByName(prefix + i);
+
+        for (let opt of options) {
+            if (opt.checked && opt.value === answers[i-1]) {
+                score++;
+            }
+        }
+    }
+    return score;
+}
+
+function startBefore(){
+    if(document.getElementById("name").value===""){
+        alert("Enter name");
         return;
     }
-
     beforeStart = Date.now();
-    document.getElementById("beforeQ").style.display = "block";
+    document.getElementById("beforeQ").style.display="block";
 }
 
-function submitBefore() {
-    beforeTime = (Date.now() - beforeStart) / 1000;
-    document.getElementById("beforeTime").innerHTML = "Time: " + beforeTime + " sec";
+function submitBefore(){
+    let time = (Date.now()-beforeStart)/1000;
+    let score = getScore("b");
 
-    document.getElementById("beforeQ").style.display = "none";
-    document.getElementById("practiceBox").style.display = "block";
+    document.getElementById("beforeTime").innerHTML =
+        "Time: "+time+" sec | Score: "+score+"/6";
 
-    startPracticeTimer();
+    document.getElementById("beforeQ").style.display="none";
+    document.getElementById("practiceBox").style.display="block";
+
+    startTimer();
 }
 
-function startPracticeTimer() {
-    practiceTime = 120;
+function startTimer(){
+    let t = 60;
 
-    practiceInterval = setInterval(() => {
-        let m = Math.floor(practiceTime / 60);
-        let s = practiceTime % 60;
-
-        document.getElementById("practiceTimer").innerText =
-            m + ":" + (s < 10 ? "0" : "") + s;
-
-        practiceTime--;
-
-        if (practiceTime < 0) {
-            clearInterval(practiceInterval);
-            document.getElementById("practiceBox").style.display = "none";
-            document.getElementById("afterStartBtn").disabled = false;
-            alert("Start After Practice!");
+    let interval=setInterval(()=>{
+        document.getElementById("timer").innerText =
+            Math.floor(t/60)+":"+(t%60<10?"0":"")+t%60;
+        t--;
+        if(t<0){
+            clearInterval(interval);
+            document.getElementById("practiceBox").style.display="none";
+            document.getElementById("afterBtn").disabled=false;
         }
-    }, 1000);
+    },1000);
 }
 
-function startAfter() {
+function startAfter(){
     afterStart = Date.now();
-    document.getElementById("afterQ").style.display = "block";
+    document.getElementById("afterQ").style.display="block";
 }
 
-function submitAfter() {
-    afterTime = (Date.now() - afterStart) / 1000;
-    document.getElementById("afterTime").innerHTML = "Time: " + afterTime + " sec";
+function submitAfter(){
+    let time = (Date.now()-afterStart)/1000;
+    let score = getScore("a");
+
+    document.getElementById("afterTime").innerHTML =
+        "Time: "+time+" sec | Score: "+score+"/6";
+
+    document.getElementById("afterQ").style.display="none";
 
     document.getElementById("result").innerHTML =
-        afterTime < beforeTime ? "✅ Improved!" : "❌ Try Again!";
+        "Test Completed!";
 }
 </script>
 
