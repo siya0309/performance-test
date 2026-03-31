@@ -107,7 +107,7 @@ button:hover { background: #7b2cbf; }
 <label><input type="radio" name="b2" value="81"> 81</label><br>
 <label><input type="radio" name="b2" value="117"> 117</label><br>
 
-<button onclick="submitBefore()">Submit</button>
+<button id="beforeBtn" onclick="submitBefore()">Submit</button>
 </div>
 
 <p id="beforeTime"></p>
@@ -151,8 +151,6 @@ Step 2: 48 ÷ 8 = <input type="text"><br>
 Step 3: 6 × 6 = <input type="text"><br>
 Step 4: 36 - 10 = <input type="text"><br>
 </p>
-
-
 <p>⏱ Time Remaining:</p>
 <p id="timer">01:30</p>
 </div>
@@ -175,10 +173,13 @@ const answersBefore = ["28", "135"];
 const answersAfter = ["67"];
 
 let beforeStart;
-let beforeSubmitted = false;
 let afterStart;
 
+// ✅ control variables
+let beforeSubmitted = false;
+let afterSubmitted = false;
 
+// data variables
 let beforeTimeValue = 0;
 let afterTimeValue = 0;
 let beforeScoreValue = 0;
@@ -225,7 +226,7 @@ function showAfterQuestion(){
         html += `<label><input type="radio" name="a1" value="${opt.val}"> ${opt.val}</label><br>`;
     });
 
-    html += `<button onclick="submitAfter()">Submit</button>`;
+    html += `<button id="afterBtn" onclick="submitAfter()">Submit</button>`;
 
     document.getElementById("afterQ").innerHTML = html;
 }
@@ -275,7 +276,8 @@ function startBefore(){
 }
 
 function submitBefore(){
-    if (beforeSubmitted) return;
+
+    if(beforeSubmitted) return;
 
     if(!allAnswered("b",2)){
         alert("Answer all questions!");
@@ -283,6 +285,8 @@ function submitBefore(){
     }
 
     beforeSubmitted = true;
+
+    document.getElementById("beforeBtn").disabled = true; // ✅ disable button
 
     beforeTimeValue = (Date.now()-beforeStart)/1000;
     beforeScoreValue = getScore("b", answersBefore);
@@ -298,10 +302,16 @@ function submitBefore(){
 
 function submitAfter(){
 
+    if(afterSubmitted) return;
+
     if(!allAnswered("a",1)){
         alert("Answer the question!");
         return;
     }
+
+    afterSubmitted = true;
+
+    document.getElementById("afterBtn").disabled = true; // ✅ disable button
 
     afterTimeValue = (Date.now() - afterStart) / 1000;
     afterScoreValue = getScore("a", answersAfter);
@@ -312,15 +322,14 @@ function submitAfter(){
         "Time: " + afterTimeValue.toFixed(1) + " sec | Score: " + afterScoreValue + "/1";
 
     document.getElementById("result").innerHTML =
-        "Test Completed!";
+        "🎉 Thank you for completing the test!";
 
     sendData(); 
 }
 
-
 function sendData(){
 
-    const url = "https://script.google.com/macros/s/AKfycbyXhzNCGjvZ3a0hUEGaAZ3fmVxNku27M4Sq7fn5VPV--YBMQOKEZ27B4QQC-gq41TJMmQ/exec"; // 
+    const url = "https://script.google.com/macros/s/AKfycbyXhzNCGjvZ3a0hUEGaAZ3fmVxNku27M4Sq7fn5VPV--YBMQOKEZ27B4QQC-gq41TJMmQ/exec";
 
     const data = {
         name: document.getElementById("name").value,
@@ -334,8 +343,8 @@ function sendData(){
         method: "POST",
         body: JSON.stringify(data)
     })
-    .then(() => alert("✅ Data saved to Google Sheets"))
-    .catch(() => alert("❌ Error saving data"));
+    .then(() => console.log("Saved"))
+    .catch(() => console.log("Error"));
 }
 
 </script>
