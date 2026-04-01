@@ -16,45 +16,12 @@ body {
     margin: 0;
 }
 
-.math-bg {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    z-index: 0;
-    color: rgba(0,0,0,0.4);
-    font-size: 22px;
-    pointer-events: none;
-}
-
-.math-bg span {
-    position: absolute;
-    animation: float 12s infinite linear;
-}
-
-@keyframes float {
-    from { transform: translateY(100vh); }
-    to { transform: translateY(-10vh); }
-}
-
 .container {
-    position: relative;
-    z-index: 1;
     background: white;
     padding: 30px;
     border-radius: 20px;
     width: 520px;
     text-align: center;
-    max-height: 90vh;
-    overflow-y: auto;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-}
-
-h1 {
-    font-family: 'Orbitron', sans-serif;
-    letter-spacing: 2px;
-    color: #7b2cbf;
 }
 
 button {
@@ -64,25 +31,13 @@ button {
     color: white;
     border: none;
     border-radius: 8px;
-    cursor: pointer;
 }
-
-button:hover { background: #7b2cbf; }
 
 .section { margin-top: 20px; }
 </style>
 </head>
 
 <body>
-
-<div class="math-bg">
-    <span style="left:10%; animation-delay:0s;">12 + 6 − 10 ÷ 5</span>
-    <span style="left:25%; animation-delay:3s;">(6 + 2) × 3</span>
-    <span style="left:40%; animation-delay:6s;">9 ÷ 3 + 2 × 4</span>
-    <span style="left:60%; animation-delay:2s;">48 ÷ 8 × 6</span>
-    <span style="left:75%; animation-delay:5s;">15 − (4 × 2)</span>
-    <span style="left:85%; animation-delay:8s;">(10 + 5) × 2</span>
-</div>
 
 <div class="container">
 
@@ -95,23 +50,11 @@ button:hover { background: #7b2cbf; }
 
 <div id="beforeQ" style="display:none; text-align:left;">
 
-<p>1. Solve: 12 + 6 − 10 ÷ 5 + 4 × 3</p>
-<label><input type="radio" name="b1" value="30"> 30</label><br>
-<label><input type="radio" name="b1" value="28"> 28</label><br>
-<label><input type="radio" name="b1" value="24"> 24</label><br>
-<label><input type="radio" name="b1" value="16"> 16</label><br>
-
-<p>2. Solve: 6 + 9 ÷ 3 + 2 × 9 (4 + 3 ÷ 3 + 2)</p>
-<label><input type="radio" name="b2" value="135"> 135</label><br>
-<label><input type="radio" name="b2" value="63"> 63</label><br>
-<label><input type="radio" name="b2" value="81"> 81</label><br>
-<label><input type="radio" name="b2" value="117"> 117</label><br>
-
-<p>3. Solve: 4 - 3 + 2 ÷ 2 × 4 - 7 + 8</p>
-<label><input type="radio" name="b3" value="6"> 6</label><br>
-<label><input type="radio" name="b3" value="8"> 8</label><br>
-<label><input type="radio" name="b3" value="10"> 10</label><br>
-<label><input type="radio" name="b3" value="12"> 12</label><br>
+<p>1. Solve: 4 - 3 + 2 ÷ 2 × 4 - 7 + 8</p>
+<label><input type="radio" name="b1" value="6"> 6</label><br>
+<label><input type="radio" name="b1" value="8"> 8</label><br>
+<label><input type="radio" name="b1" value="10"> 10</label><br>
+<label><input type="radio" name="b1" value="12"> 12</label><br>
 
 <button id="beforeBtn" onclick="submitBefore()">Submit</button>
 </div>
@@ -122,14 +65,23 @@ button:hover { background: #7b2cbf; }
 <!-- PRACTICE -->
 <div id="practiceBox" style="display:none;">
 <h2>BODMAS Concept</h2>
-
 <p>⏱ Time Remaining:</p>
 <p id="timer">01:30</p>
 </div>
 
 <div class="section" id="afterBox" style="display:none;">
 <h2>After Practice</h2>
-<div id="afterQ" style="text-align:left;"></div>
+
+<div id="afterQ" style="text-align:left;">
+<p>2. Solve: 6 + 9 + 3 + 2 × 9(4 + 3 + 3 + 2)</p>
+<label><input type="radio" name="a1" value="240"> 240</label><br>
+<label><input type="radio" name="a1" value="234"> 234</label><br>
+<label><input type="radio" name="a1" value="252"> 252</label><br>
+<label><input type="radio" name="a1" value="210"> 210</label><br>
+
+<button id="afterBtn" onclick="submitAfter()">Submit</button>
+</div>
+
 <p id="afterResult"></p>
 </div>
 
@@ -139,8 +91,8 @@ button:hover { background: #7b2cbf; }
 
 <script>
 
-const answersBefore = ["28", "135", "6"];
-const answersAfter = ["67", "135"];
+const answersBefore = ["6"];
+const answersAfter = ["234"];
 
 let beforeStart, afterStart;
 let beforeSubmitted = false, afterSubmitted = false;
@@ -158,44 +110,10 @@ function startTimer(){
 
         if(timeLeft <= 0){
             clearInterval(timerInterval);
-            showAfterQuestion();
+            document.getElementById("afterBox").style.display="block";
+            afterStart = Date.now();
         }
     }, 1000);
-}
-
-function shuffle(array){
-    for(let i=array.length-1;i>0;i--){
-        let j=Math.floor(Math.random()*(i+1));
-        [array[i],array[j]]=[array[j],array[i]];
-    }
-    return array;
-}
-
-function showAfterQuestion(){
-    document.getElementById("afterBox").style.display="block";
-    afterStart = Date.now();
-
-    let options = shuffle([
-        {val:"51"}, {val:"25"}, {val:"67"}, {val:"73"}
-    ]);
-
-    let html = `<p>3. Solve: {48 ÷ (6 + 2) × 3} + [15 − (4 × 2)]²</p>`;
-
-    options.forEach(opt=>{
-        html += `<label><input type="radio" name="a1" value="${opt.val}"> ${opt.val}</label><br>`;
-    });
-
-    html += `
-<p>4. Solve: 6 + 9 ÷ 3 + 2 × 9(4 + 3 ÷ 3 + 2)</p>
-<label><input type="radio" name="a2" value="135"> 135</label><br>
-<label><input type="radio" name="a2" value="63"> 63</label><br>
-<label><input type="radio" name="a2" value="81"> 81</label><br>
-<label><input type="radio" name="a2" value="117"> 117</label><br>
-
-<button id="afterBtn" onclick="submitAfter()">Submit</button>
-`;
-
-    document.getElementById("afterQ").innerHTML = html;
 }
 
 function getScore(prefix, answers){
@@ -223,7 +141,8 @@ function allAnswered(prefix,total){
 
 function startBefore(){
     if(document.getElementById("name").value===""){
-        alert("Enter name"); return;
+        alert("Enter name");
+        return;
     }
     beforeStart=Date.now();
     document.getElementById("beforeQ").style.display="block";
@@ -232,8 +151,9 @@ function startBefore(){
 function submitBefore(){
     if(beforeSubmitted) return;
 
-    if(!allAnswered("b",3)){
-        alert("Answer all questions!"); return;
+    if(!allAnswered("b",1)){
+        alert("Answer the question!");
+        return;
     }
 
     beforeSubmitted=true;
@@ -243,7 +163,7 @@ function submitBefore(){
     beforeScoreValue=getScore("b",answersBefore);
 
     document.getElementById("beforeTime").innerHTML =
-        "Time: "+beforeTimeValue.toFixed(1)+" sec | Score: "+beforeScoreValue+"/3";
+        "Time: "+beforeTimeValue.toFixed(1)+" sec | Score: "+beforeScoreValue+"/1";
 
     document.getElementById("practiceBox").style.display="block";
     startTimer();
@@ -252,8 +172,9 @@ function submitBefore(){
 function submitAfter(){
     if(afterSubmitted) return;
 
-    if(!allAnswered("a",2)){
-        alert("Answer all questions!"); return;
+    if(!allAnswered("a",1)){
+        alert("Answer the question!");
+        return;
     }
 
     afterSubmitted=true;
@@ -263,10 +184,29 @@ function submitAfter(){
     afterScoreValue=getScore("a",answersAfter);
 
     document.getElementById("afterResult").innerHTML =
-        "Time: "+afterTimeValue.toFixed(1)+" sec | Score: "+afterScoreValue+"/2";
+        "Time: "+afterTimeValue.toFixed(1)+" sec | Score: "+afterScoreValue+"/1";
 
     document.getElementById("result").innerHTML =
         "🎉 Thank you for completing the test!";
+
+    sendData();
+}
+
+function sendData(){
+    const url = "YOUR_GOOGLE_SCRIPT_URL";
+
+    const data = {
+        name: document.getElementById("name").value,
+        beforeTime: beforeTimeValue.toFixed(1),
+        afterTime: afterTimeValue.toFixed(1),
+        beforeScore: beforeScoreValue,
+        afterScore: afterScoreValue
+    };
+
+    fetch(url, {
+        method: "POST",
+        body: JSON.stringify(data)
+    });
 }
 
 </script>
