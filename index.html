@@ -77,11 +77,6 @@ button:hover { background: #7b2cbf; }
 
 <div class="math-bg">
     <span style="left:10%; animation-delay:0s;">12 + 6 − 10 ÷ 5</span>
-    <span style="left:25%; animation-delay:3s;">(6 + 2) × 3</span>
-    <span style="left:40%; animation-delay:6s;">9 ÷ 3 + 2 × 4</span>
-    <span style="left:60%; animation-delay:2s;">48 ÷ 8 × 6</span>
-    <span style="left:75%; animation-delay:5s;">15 − (4 × 2)</span>
-    <span style="left:85%; animation-delay:8s;">(10 + 5) × 2</span>
 </div>
 
 <div class="container">
@@ -108,44 +103,8 @@ button:hover { background: #7b2cbf; }
 <p id="beforeTime"></p>
 </div>
 
-<!-- PRACTICE -->
 <div id="practiceBox" style="display:none;">
 <h2>BODMAS Concept</h2>
-
-<strong>Steps:</strong><br>
-1. Solve brackets first<br>
-2. Solve powers/roots<br>
-3. Perform division and multiplication (left to right)<br>
-4. Perform addition and subtraction (left to right)<br><br>
-
-<p style="text-align:left;">
-<strong>BODMAS Rule:</strong><br><br>
-B → Brackets<br>
-O → Orders<br>
-D → Division<br>
-M → Multiplication<br>
-A → Addition<br>
-S → Subtraction<br><br>
-
-<strong>1.Solve:</strong> 12 + 6 × 3<br>
-Step 1: 6 × 3 = <input type="text"><br>
-Step 2: 12 + 18 = <input type="text"><br><br>
-
-<strong>2.Solve:</strong> (10 + 5) × 2<br>
-Step 1: 10 + 5 = <input type="text"><br>
-Step 2: 15 × 2 = <input type="text"><br><br>
-
-<strong>3.Solve:</strong> 36 ÷ (6 + 3) × 4<br>
-Step 1: 6 + 3 = <input type="text"><br>
-Step 2: 36 ÷ 9 = <input type="text"><br>
-Step 3: 4 × 4 = <input type="text"><br><br>
-
-<strong>4.Solve:</strong> 48 ÷ 8 × (5 + 1) - 10<br>
-Step 1: 5 + 1 = <input type="text"><br>
-Step 2: 48 ÷ 8 = <input type="text"><br>
-Step 3: 6 × 6 = <input type="text"><br>
-Step 4: 36 - 10 = <input type="text"><br>
-</p>
 <p>⏱ Time Remaining:</p>
 <p id="timer">01:00</p>
 </div>
@@ -165,20 +124,13 @@ Step 4: 36 - 10 = <input type="text"><br>
 const answersBefore = ["-4"];
 const answersAfter = ["234"];
 
-let beforeStart;
-let afterStart;
+let beforeStart, afterStart;
+let beforeSubmitted = false, afterSubmitted = false;
 
-let beforeSubmitted = false;
-let afterSubmitted = false;
+let beforeScoreValue = 0, afterScoreValue = 0;
+let beforeTimeValue = 0, afterTimeValue = 0;
 
-let beforeScoreValue = 0;
-let afterScoreValue = 0;
-
-let beforeTimeValue = 0;
-let afterTimeValue = 0;
-
-let timeLeft = 60;
-let timerInterval;
+let timeLeft = 60, timerInterval;
 
 // TIMER
 function startTimer(){
@@ -194,7 +146,6 @@ function startTimer(){
     }, 1000);
 }
 
-// START BEFORE
 function startBefore(){
     if(document.getElementById("name").value===""){
         alert("Enter name");
@@ -204,55 +155,40 @@ function startBefore(){
     document.getElementById("beforeQ").style.display="block";
 }
 
-// CHECK ANSWERS
 function allAnswered(prefix, total){
     for(let i=1;i<=total;i++){
-        let checked = false;
         let options = document.getElementsByName(prefix+i);
-        for(let opt of options){
-            if(opt.checked) checked = true;
-        }
+        let checked = [...options].some(opt => opt.checked);
         if(!checked) return false;
     }
     return true;
 }
 
-// SCORE FUNCTION
-function getScore(prefix, answers) {
+function getScore(prefix, answers){
     let score = 0;
-    for (let i = 1; i <= answers.length; i++) {
-        let options = document.getElementsByName(prefix + i);
-        for (let opt of options) {
-            if (opt.checked && opt.value === answers[i-1]) score++;
+    for(let i=1;i<=answers.length;i++){
+        let options = document.getElementsByName(prefix+i);
+        for(let opt of options){
+            if(opt.checked && opt.value === answers[i-1]) score++;
         }
     }
     return score;
 }
 
-// ✅ ADDED FUNCTION
-function highlightAnswers(prefix, answers) {
-    for (let i = 1; i <= answers.length; i++) {
-        let options = document.getElementsByName(prefix + i);
-
-        for (let opt of options) {
+function highlightAnswers(prefix, answers){
+    for(let i=1;i<=answers.length;i++){
+        let options = document.getElementsByName(prefix+i);
+        for(let opt of options){
             let label = opt.parentElement;
-
             label.style.color = "";
-
-            if (opt.value === answers[i-1]) {
-                label.style.color = "green";
-            }
-
-            if (opt.checked && opt.value !== answers[i-1]) {
-                label.style.color = "red";
-            }
+            if(opt.value === answers[i-1]) label.style.color = "green";
+            if(opt.checked && opt.value !== answers[i-1]) label.style.color = "red";
         }
     }
 }
 
-// SUBMIT BEFORE
+// BEFORE
 function submitBefore(){
-
     if(beforeSubmitted) return;
 
     if(!allAnswered("b",1)){
@@ -264,10 +200,9 @@ function submitBefore(){
     document.getElementById("beforeBtn").disabled = true;
 
     beforeTimeValue = (Date.now() - beforeStart) / 1000;
-
     beforeScoreValue = getScore("b", answersBefore);
 
-    highlightAnswers("b", answersBefore); // ✅ ADDED
+    highlightAnswers("b", answersBefore);
 
     document.getElementById("beforeTime").innerHTML =
         "Time: " + beforeTimeValue.toFixed(1) + " sec | Score: " + beforeScoreValue + "/1";
@@ -276,13 +211,13 @@ function submitBefore(){
     startTimer();
 }
 
-// SHOW AFTER QUESTION
+// AFTER
 function showAfterQuestion(){
     document.getElementById("afterBox").style.display = "block";
     afterStart = Date.now();
 
-    let html = `
-    <p>2. Solve: 6 + 9 + 3 + 2 × 9 x (4 + 3 + 3 + 2)</p>
+    document.getElementById("afterQ").innerHTML = `
+    <p>2. Solve: 6 + 9 + 3 + 2 × 9 × (4 + 3 + 3 + 2)</p>
 
     <label><input type="radio" name="a1" value="200"> 200</label><br>
     <label><input type="radio" name="a1" value="222"> 222</label><br>
@@ -291,13 +226,9 @@ function showAfterQuestion(){
 
     <button onclick="submitAfter()">Submit</button>
     `;
-
-    document.getElementById("afterQ").innerHTML = html;
 }
 
-// SUBMIT AFTER
 function submitAfter(){
-
     if(afterSubmitted) return;
 
     if(!allAnswered("a",1)){
@@ -308,16 +239,38 @@ function submitAfter(){
     afterSubmitted = true;
 
     afterTimeValue = (Date.now() - afterStart) / 1000;
-
     afterScoreValue = getScore("a", answersAfter);
 
-    highlightAnswers("a", answersAfter); // ✅ ADDED
+    highlightAnswers("a", answersAfter);
 
     document.getElementById("afterResult").innerHTML =
         "Time: " + afterTimeValue.toFixed(1) + " sec | Score: " + afterScoreValue + "/1";
 
     document.getElementById("result").innerHTML =
-        "🎉 Test Completed!";
+        "🎉 Thank you for completing the test!";
+
+    sendData(); // ✅ SAVE DATA
+}
+
+// ✅ GOOGLE SHEETS FUNCTION
+function sendData(){
+
+    const url = "https://script.google.com/macros/s/AKfycbyXhzNCGjvZ3a0hUEGaAZ3fmVxNku27M4Sq7fn5VPV--YBMQOKEZ27B4QQC-gq41TJMmQ/exec";
+
+    const data = {
+        name: document.getElementById("name").value,
+        beforeTime: beforeTimeValue.toFixed(1),
+        afterTime: afterTimeValue.toFixed(1),
+        beforeScore: beforeScoreValue,
+        afterScore: afterScoreValue
+    };
+
+    fetch(url, {
+        method: "POST",
+        body: JSON.stringify(data)
+    })
+    .then(() => console.log("Saved"))
+    .catch(() => console.log("Error"));
 }
 
 </script>
