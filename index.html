@@ -76,8 +76,20 @@ button:hover { background: #7b2cbf; }
 <body>
 
 <div class="math-bg">
-    <span style="left:10%; animation-delay:0s;">12 + 6 − 10 ÷ 5</span>
-</div>
+
+<span style="left:10%;
+
+animation-delay:0s;">12 + 6 - 10 + 5</span> <span style="left:25%;
+
+animation-delay:3s;">(6 + 2) x 3</span> <span style="left:40%;
+
+animation-delay:6s;">9 ÷ 3 + 2 x 4</span>
+
+<span style="left:60%; animation-delay:2s;">48 ÷ 8 x 6</span> <span style="left:75%;
+
+animation-delay:5s;">15 - (4 x 2)</span> <span style="left:85%;
+
+animation-delay:8s;">(10 + 5) × 2</span> </div>
 
 <div class="container">
 
@@ -142,7 +154,7 @@ Step 3: 6 × 6 = <input type="text"><br>
 Step 4: 36 - 10 = <input type="text"><br>
 </p>
 <p>⏱ Time Remaining:</p>
-<p id="timer">01:00</p>
+<p id="timer">10:00</p>
 </div>
 
 <div id="afterBox" style="display:none;">
@@ -166,7 +178,7 @@ let beforeSubmitted = false, afterSubmitted = false;
 let beforeScoreValue = 0, afterScoreValue = 0;
 let beforeTimeValue = 0, afterTimeValue = 0;
 
-let timeLeft = 60, timerInterval;
+let timeLeft = 600, timerInterval;
 
 // TIMER
 function startTimer(){
@@ -285,10 +297,10 @@ function submitAfter(){
     document.getElementById("result").innerHTML =
         "🎉 Thank you for completing the test!";
 
-    sendData(); // ✅ SAVE DATA
+    sendData(); // SAVE DATA
 }
 
-// ✅ GOOGLE SHEETS FUNCTION
+// GOOGLE SHEETS FUNCTION
 function sendData(){
 
     const url = "https://script.google.com/macros/s/AKfycbyXhzNCGjvZ3a0hUEGaAZ3fmVxNku27M4Sq7fn5VPV--YBMQOKEZ27B4QQC-gq41TJMmQ/exec";
